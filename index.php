@@ -62,9 +62,15 @@
                                     <div class="caption">
                                         <h4>' . $item['name'] . '</h4>
                                         <p>' . $item['description'] . '</p>
-                                        <a href="#" class="btn btn-order" role="button">
+                           
+
+                                        <a href="pedido.php?id=' . $item['id'] . '" class="btn btn-order" role="button">
+
+
 											<span class="glyphicon glyphicon-shopping-cart">
 														</span> Ordenar</a>
+
+
                                     </div>
                                 </div>
                             </div>';
