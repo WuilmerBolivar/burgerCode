@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Burger Code</title>
+        <title>Burger Menu</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -12,14 +12,17 @@
     </head>
     
     
-    <body>
-        <div class="container site">
-            <h1 class="text-logo"><span class="glyphicon glyphicon-cutlery"></span> Burger Code <span class="glyphicon glyphicon-cutlery"></span></h1>
-            <?php
-				require 'admin/database.php';
-			 
-                echo '<nav>
-                        <ul class="nav nav-pills">';
+<body>
+	<div class="container site">
+		<h1 class="text-logo">
+			<span class="glyphicon glyphicon-cutlery"></span> 
+					Burger  Menu 
+			<span class="glyphicon glyphicon-cutlery"></span>
+		</h1>
+
+<?php
+	require 'admin/database.php';
+		echo '<nav><ul class="nav nav-pills">';
 
                 $db = Database::connect();
                 $statement = $db->query('SELECT * FROM categories');
@@ -27,9 +30,11 @@
                 foreach ($categories as $category) 
                 {
                     if($category['id'] == '1')
-                        echo '<li role="presentation" class="active"><a href="#'. $category['id'] . '" data-toggle="tab">' . $category['name'] . '</a></li>';
+                        echo '<li role="presentation" class="active">
+							 <a href="#'. $category['id'] . '" data-toggle="tab">' . $category['name'] . '</a></li>';
                     else
-                        echo '<li role="presentation"><a href="#'. $category['id'] . '" data-toggle="tab">' . $category['name'] . '</a></li>';
+                        echo '<li role="presentation">
+							<a href="#'. $category['id'] . '" data-toggle="tab">' . $category['name'] . '</a></li>';
                 }
 
                 echo    '</ul>
@@ -53,11 +58,13 @@
                         echo '<div class="col-sm-6 col-md-4">
                                 <div class="thumbnail">
                                     <img src="images/' . $item['image'] . '" alt="...">
-                                    <div class="price">' . number_format($item['price'], 2, '.', ''). ' €</div>
+                                    <div class="price">' . number_format($item['price'], 2, '.', ''). ' Bs</div>
                                     <div class="caption">
                                         <h4>' . $item['name'] . '</h4>
                                         <p>' . $item['description'] . '</p>
-                                        <a href="#" class="btn btn-order" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Commander</a>
+                                        <a href="#" class="btn btn-order" role="button">
+											<span class="glyphicon glyphicon-shopping-cart">
+														</span> Ordenar</a>
                                     </div>
                                 </div>
                             </div>';
@@ -71,5 +78,4 @@
             ?>
         </div>
     </body>
-</html>
-
+</html>	

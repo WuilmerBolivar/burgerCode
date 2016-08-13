@@ -22,23 +22,23 @@
        
         if(empty($name)) 
         {
-            $nameError = 'Ce champ ne peut pas être vide';
+            $nameError = 'Este campo no puede estar vacío';
             $isSuccess = false;
         }
         if(empty($description)) 
         {
-            $descriptionError = 'Ce champ ne peut pas être vide';
+            $descriptionError = 'Este campo no puede estar vacío';
             $isSuccess = false;
         } 
         if(empty($price)) 
         {
-            $priceError = 'Ce champ ne peut pas être vide';
+            $priceError = 'Este campo no puede estar vacío';
             $isSuccess = false;
         } 
          
         if(empty($category)) 
         {
-            $categoryError = 'Ce champ ne peut pas être vide';
+            $categoryError = 'Este campo no puede estar vacío';
             $isSuccess = false;
         }
         if(empty($image)) // le input file est vide, ce qui signifie que l'image n'a pas ete update
@@ -51,12 +51,12 @@
             $isUploadSuccess =true;
             if($imageExtension != "jpg" && $imageExtension != "png" && $imageExtension != "jpeg" && $imageExtension != "gif" ) 
             {
-                $imageError = "Les fichiers autorises sont: .jpg, .jpeg, .png, .gif";
+                $imageError = "Los archivos permitidos son: .jpg, .jpeg, .png, .gif";
                 $isUploadSuccess = false;
             }
             if(file_exists($imagePath)) 
             {
-                $imageError = "Le fichier existe deja";
+                $imageError = "El archivo ya existe";
                 $isUploadSuccess = false;
             }
             if($_FILES["image"]["size"] > 500000) 
@@ -68,7 +68,7 @@
             {
                 if(!move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath)) 
                 {
-                    $imageError = "Il y a eu une erreur lors de l'upload";
+                    $imageError = "Se ha producido un error al subir el archivo";
                     $isUploadSuccess = false;
                 } 
             } 
@@ -130,43 +130,36 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Burger Code</title>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <link href='http://fonts.googleapis.com/css?family=Holtwood+One+SC' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="../css/styles.css">
+        <?php include("head.php")?>
     </head>
     
     <body>
-        <h1 class="text-logo"><span class="glyphicon glyphicon-cutlery"></span> Burger Code <span class="glyphicon glyphicon-cutlery"></span></h1>
+        <h1 class="text-logo"><span class="glyphicon glyphicon-cutlery"></span> Burger Menu <span class="glyphicon glyphicon-cutlery"></span></h1>
          <div class="container admin">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1><strong>Modifier un item</strong></h1>
+                    <h1><strong>Editar producto</strong></h1>
                     <br>
                     <form class="form" action="<?php echo 'update.php?id='.$id;?>" role="form" method="post" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="name">Nom:
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Nom" value="<?php echo $name;?>">
+                            <label for="name">Nombre:
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" value="<?php echo $name;?>">
                             <span class="help-inline"><?php echo $nameError;?></span>
                         </div>
                         <div class="form-group">
-                            <label for="description">Description:
-                            <input type="text" class="form-control" id="description" name="description" placeholder="Description" value="<?php echo $description;?>">
+                            <label for="description">Descripción:
+                            <input type="text" class="form-control" id="description" name="description" placeholder="Descripción" value="<?php echo $description;?>">
                             <span class="help-inline"><?php echo $descriptionError;?></span>
                         </div>
                         <div class="form-group">
-                        <label for="price">Prix: (en €)
-                            <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Prix" value="<?php echo $price;?>">
+                        <label for="price">Precio: (Bs)
+                            <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Precio" value="<?php echo $price;?>">
                             <span class="help-inline"><?php echo $priceError;?></span>
                         </div>
 
 
                         <div class="form-group">
-                            <label for="category">Catégorie:
+                            <label for="category">Categoría:
                             <select class="form-control" id="category" name="category">
                             <?php
                                $db = Database::connect();
@@ -183,27 +176,27 @@
                             <span class="help-inline"><?php echo $categoryError;?></span>
                         </div>
                         <div class="form-group">
-                            <label for="image">Image:</label>
+                            <label for="image">Imagen:</label>
                             <p><?php echo $image;?></p>
-                            <label for="image">Sélectionner une nouvelle image:</label>
+                            <label for="image">Selecciona una nueva imagen::</label>
                             <input type="file" id="image" name="image"> 
                             <span class="help-inline"><?php echo $imageError;?></span>
                         </div>
                         <br>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Modifier</button>
-                            <a class="btn btn-primary" href="index.php"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
+                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Modificar</button>
+                            <a class="btn btn-primary" href="index.php"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>
                        </div>
                     </form>
                 </div>
                 <div class="col-sm-6 site">
                     <div class="thumbnail">
                         <img src="<?php echo '../images/'.$image;?>" alt="...">
-                        <div class="price"><?php echo number_format((float)$price, 2, '.', ''). ' €';?></div>
+                        <div class="price"><?php echo number_format((float)$price, 2). ' $';?></div>
                           <div class="caption">
                             <h4><?php echo $name;?></h4>
                             <p><?php echo $description;?></p>
-                            <a href="#" class="btn btn-order" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Commander</a>
+                            <a href="#" class="btn btn-order" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Ordenar</a>
                           </div>
                     </div>
                 </div>
